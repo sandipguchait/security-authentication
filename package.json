@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/sandipguchait/security-authentication/issues"
   },
-  "homepage": "https://github.com/sandipguchait/security-authentication#readme"
+  "homepage": "https://github.com/sandipguchait/security-authentication#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
