@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 //mongodb
 const MONGOURL = 'mongodb://sandipguchait:roshni77@ds343985.mlab.com:43985/sec-auth'
@@ -13,8 +14,10 @@ mongoose.connect(MONGOURL)
 
 //importing models
 const { User } = require('./models/user')
+const  { auth } = require('./middleware/auth');
 
 app.use(bodyParser.json()); // converts the data to JSON format 
+app.use(cookieParser());
 
 app.post('/api/user/signup', (req, res)=>{
     const user = new User({
@@ -36,10 +39,17 @@ app.post ('/api/user/login',  (req, res)=> {
             if(err) throw err;
             if(!isMatch) return res.status(400).json({
                 message:'Wrong Password'
+            });
+            user.generateToken((err, user)=>{
+                if(err) return res.status(400).send(err);
+                res.cookie('auth', user.token).send('ok')
             })
-            res.status(200).send(isMatch)
         })
     })
+});
+
+app.get('/user/profile', auth, (req, res)=>{
+    res.status(200).send(req.token)
 })
 
 
