@@ -45,6 +45,8 @@ app.post ('/api/user/signin',  (req, res)=> {
     })
 });
 
+// still to fix the code fro heree
+
 app.get('/user/profile', auth, (req, res)=>{
     res.status(200).send(req.token)
 })
