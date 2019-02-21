@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+
 
 bcrypt.genSalt(10, (err, salt)=> {
     if(err) return next(err);

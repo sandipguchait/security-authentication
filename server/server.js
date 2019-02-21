@@ -29,7 +29,7 @@ app.post('/api/user/signup', (req, res)=>{
     })
 })
 
-app.post ('/api/user/login',  (req, res)=> {
+app.post ('/api/user/signin',  (req, res)=> {
     //checks that email is present or not
     User.findOne({'email': req.body.email}, (err, user)=> {
         if(!user) res.json({message: 'Login failed, user not found'})
@@ -40,10 +40,7 @@ app.post ('/api/user/login',  (req, res)=> {
             if(!isMatch) return res.status(400).json({
                 message:'Wrong Password'
             });
-            user.generateToken((err, user)=>{
-                if(err) return res.status(400).send(err);
-                res.cookie('auth', user.token).send('ok')
-            })
+            res.status(200).send('Logged in successfully')
         })
     })
 });

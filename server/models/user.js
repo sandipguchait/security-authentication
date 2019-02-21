@@ -38,7 +38,7 @@ userSchema.pre('save', function(next){
     } else(
         next()
     )
-});
+})
 
 //comparing passwords
 userSchema.methods.comparePassword = function(candidatePassword, cb){
@@ -48,6 +48,7 @@ userSchema.methods.comparePassword = function(candidatePassword, cb){
         cb(null, isMatch)
     })
 }
+
 // creating and storing token 
 userSchema.methods.generateToken = function(cb){
     var user = this;
