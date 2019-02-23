@@ -1,5 +1,8 @@
 const { User } = require('./../models/user');
 
+
+// authentication functions
+
 let auth = ( req, res , next) => {
     let token = req.cookies.auth;
 
@@ -10,5 +13,6 @@ let auth = ( req, res , next) => {
       next();
     })
 }
+
 
 module.exports = { auth }
